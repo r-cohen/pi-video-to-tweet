@@ -39,6 +39,9 @@ twurl -H upload.twitter.com "/1.1/media/upload.json" -d "command=APPEND&media_id
 echo "upload FINALIZE"
 twurl -H upload.twitter.com "/1.1/media/upload.json" -d "command=FINALIZE&media_id=$media_id_string"
 
+# wait before posting status, video might still be processing server-side
+sleep 5
+
 # tweet
 #timestamp="$(date +"%s")"
 #$timestamp"
