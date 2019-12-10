@@ -28,7 +28,7 @@ rm -f "$uploadResult"
 # upload
 echo "upload INIT"
 twurl -H upload.twitter.com "/1.1/media/upload.json" -d "media_category=tweet_video&command=INIT&media_type=video/mp4&total_bytes=$fileSize" > "$uploadResult"
-if [ ! -f "$uploadResult" ]; then
+if [ ! -f "$uploadResult" ] || [ ! -s "$uploadResult" ]; then
     echo "upload result file not found"
     exit 1
 fi
