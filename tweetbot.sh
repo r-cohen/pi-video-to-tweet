@@ -33,6 +33,11 @@ if [ ! -f "$uploadResult" ] || [ ! -s "$uploadResult" ]; then
     exit 1
 fi
 media_id_string=$(cat "$uploadResult" | jq -r '.media_id_string')
+if [ -z "$media_id_string" ]; then
+    echo "media id is empty"
+    exit 1
+fi
+
 echo "media id: $media_id_string"
 echo "upload APPEND"
 twurl -H upload.twitter.com "/1.1/media/upload.json" -d "command=APPEND&media_id=$media_id_string&segment_index=0" -f "$videoFilePath.mp4" -F "media"
